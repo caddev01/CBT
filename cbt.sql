@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2017 at 05:18 PM
+-- Generation Time: Jul 31, 2017 at 04:54 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -39,8 +39,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`admin_id`, `uname`, `pwd`, `role`) VALUES
 (1, 'ademy', 'demolalanre', 'Supervisor'),
-(2, 'Rhoda', 'moyin', 'brother'),
-(8, 'ay', 'live', 'comedy');
+(2, 'Rhoda', 'moyin', 'brother');
 
 -- --------------------------------------------------------
 
@@ -59,8 +58,9 @@ CREATE TABLE `class` (
 
 INSERT INTO `class` (`cid`, `cName`) VALUES
 (1, 'Jss 1'),
-(2, 'Jss 3'),
-(3, 'SS1');
+(9, 'Lecturer'),
+(8, 'Year 4'),
+(7, 'Year 4');
 
 -- --------------------------------------------------------
 
@@ -78,6 +78,20 @@ CREATE TABLE `questions` (
   `cans` text NOT NULL,
   `class_id` int(11) NOT NULL,
   `Image` blob NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `result`
+--
+
+CREATE TABLE `result` (
+  `sid` int(11) NOT NULL,
+  `surname` text NOT NULL,
+  `firstname` text NOT NULL,
+  `scores` int(11) NOT NULL,
+  `class_ID` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -104,6 +118,8 @@ CREATE TABLE `student` (
 INSERT INTO `student` (`s_id`, `surname`, `fname`, `username`, `s_pwd`, `dateregister`, `date_last_visit`, `class_id`) VALUES
 (2, 'akinko', 'lovilo', 'lolo', 'basic', '2017-05-20', '2017-05-20', 24),
 (3, 'Juily', 'funno', 'ruth', 'mspretty', NULL, NULL, 27),
+(8, 'Ameh', 'funsho', 'naomi00', 'joy', NULL, NULL, 34),
+(7, 'Elezie', 'Amaka', 'smurf', 'love', NULL, NULL, 3),
 (6, 'Goke', 'Moyin', 'Nuel', 'lemon', NULL, NULL, 140);
 
 -- --------------------------------------------------------
@@ -114,8 +130,8 @@ INSERT INTO `student` (`s_id`, `surname`, `fname`, `username`, `s_pwd`, `datereg
 
 CREATE TABLE `subject` (
   `subject_id` int(11) NOT NULL,
-  `sname` text NOT NULL,
-  `noq` int(11) NOT NULL,
+  `sub_name` text NOT NULL,
+  `no_que` int(11) NOT NULL,
   `class_ID` int(11) NOT NULL,
   `stime` time NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -124,11 +140,9 @@ CREATE TABLE `subject` (
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`subject_id`, `sname`, `noq`, `class_ID`, `stime`) VALUES
+INSERT INTO `subject` (`subject_id`, `sub_name`, `no_que`, `class_ID`, `stime`) VALUES
 (1, 'Mathematics', 20, 1, '00:18:00'),
-(2, 'English', 25, 2, '00:18:00'),
-(3, 'Physics', 30, 3, '00:18:00'),
-(4, 'Physics', 30, 3, '00:18:00');
+(5, 'Geology', 43, 8, '00:32:00');
 
 -- --------------------------------------------------------
 
@@ -154,7 +168,9 @@ CREATE TABLE `teacher` (
 INSERT INTO `teacher` (`t_id`, `surname`, `fname`, `username`, `t_pwd`, `dateregister`, `date_last_visit`, `class_id`) VALUES
 (1, ' gvhgvgh', 'dnjfnwj', 'bjwbfwbf', 'bfjwbfjb', '2017-05-20', '2017-05-20', 488),
 (2, 'jdnjndjn', 'fknjrne', 'njfenjfn', 'nfjenjfn', NULL, NULL, 44448),
-(3, 'Adelande', 'omobola', 'Emmanuel', 'hrbfhrbfh', NULL, NULL, 56);
+(3, 'Adelande', 'omobola', 'Emmanuel', 'hrbfhrbfh', NULL, NULL, 56),
+(4, 'Tochukwu', 'landlord', 'teacher', 'dmeyg', NULL, NULL, 34),
+(5, 'Omotosho', 'Joseph', 'rhoda', 'moyin', NULL, NULL, 12);
 
 --
 -- Indexes for dumped tables
@@ -178,6 +194,12 @@ ALTER TABLE `class`
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`qid`),
   ADD UNIQUE KEY `class_id` (`class_id`);
+
+--
+-- Indexes for table `result`
+--
+ALTER TABLE `result`
+  ADD PRIMARY KEY (`sid`);
 
 --
 -- Indexes for table `student`
@@ -207,32 +229,37 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
   MODIFY `qid` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `result`
+--
+ALTER TABLE `result`
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
