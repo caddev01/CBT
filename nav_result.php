@@ -9,7 +9,7 @@
 
    $query = "INSERT INTO result(surname, firstname, score) ";
    $query .="VALUES('{$sname}', '{$fname}', '{$score}')" ;
-   $result = mysqli_query($connection, $query) or die(mysqli_error($con));
+   $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
       }
    if(isset($result)){echo "done";}
 
