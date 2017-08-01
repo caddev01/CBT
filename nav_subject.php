@@ -8,8 +8,8 @@
 
    $query ="INSERT INTO subject(sub_name no_que) ";
    $query .="VALUES('$sname', '$noq')" ;
-   //die(mysqli_error($con));
-   $result =mysqli_query($link, $query);
+   $result =mysqli_query($connection, $query) or 
+   die(mysqli_error($connection));
       }
    if(isset($result)){echo "done";}
 ?>
